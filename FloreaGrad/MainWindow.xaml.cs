@@ -27,6 +27,9 @@ namespace FloreaGrad
         public static string expressionsString;
         public string value;
 
+        private int[] unformatted = new int[100];
+        private int arrpos = -1;
+
         public MainWindow()
         {
             InitializeComponent();
@@ -37,7 +40,8 @@ namespace FloreaGrad
         private void Calculate_Button_Click(object sender, RoutedEventArgs e) //Calculate 
         {
             expressionsString = InputTextBox.Text;
-
+            if (expressionsString.Length == 0)
+                return;
             
             float _a = float.Parse(ALimit.Text);
             float _b = float.Parse(BLimit.Text);
@@ -230,9 +234,10 @@ namespace FloreaGrad
                 pasi = _pasi;
             }
         }
-        private int[] unformatted = new int[100];
-        private int arrpos = -1;
-        private int parcount = 0;
+
+        
+
+        //private int parcount = 0;
         private void NumberClick (object sender, RoutedEventArgs e) //KeyPad
         {
             string s = (sender as Button).Content.ToString();

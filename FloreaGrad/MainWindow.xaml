@@ -5,14 +5,14 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:FloreaGrad"
         mc:Ignorable="d"
-        Title="MainWindow" Height="543.412" Width="632.648">
+        Title="FloreaCalc" Height="543" Width="632" Background="#FF878787">
     <Grid VerticalAlignment="Center" HorizontalAlignment="Center">
         <Grid.ColumnDefinitions>
             <ColumnDefinition/>
         </Grid.ColumnDefinitions>
         <Image x:Name="GraphImage" HorizontalAlignment="Left" Height="188" Margin="39,36,0,0" VerticalAlignment="Top" Width="236"/>
         <GridSplitter HorizontalAlignment="Center" Margin="0" Width="5" HorizontalContentAlignment="Center" VerticalContentAlignment="Center"/>
-        <TextBox x:Name="InputTextBox" HorizontalAlignment="Left" Height="23" Margin="415,36,0,0" TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Top" Width="120"/>
+        <TextBox x:Name="InputTextBox" HorizontalAlignment="Left" Height="23" Margin="415,36,0,0" TextWrapping="Wrap" Text="InputBox" VerticalAlignment="Top" Width="120"/>
         <GridSplitter HorizontalAlignment="Stretch" Margin="1,245,-1,254" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Height="5" VerticalAlignment="Center"/>
         <Button x:Name="Calculate_Button" Content="Calculate" HorizontalAlignment="Left" Margin="431,190,0,0" VerticalAlignment="Top" Width="75" Click="Calculate_Button_Click"/>
         <TextBlock x:Name="a_" HorizontalAlignment="Left" Margin="318,157,0,0" TextWrapping="Wrap" Text="a=" VerticalAlignment="Top" RenderTransformOrigin="-5.287,2.887"/>
