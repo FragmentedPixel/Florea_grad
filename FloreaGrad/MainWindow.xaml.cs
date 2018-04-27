@@ -30,11 +30,11 @@ namespace FloreaGrad
         public MainWindow()
         {
             InitializeComponent();
-            InputTextBox.Text = "[x]+1";
+            InputTextBox.Text = "";
         }
         float offset = 2;
 
-        private void Calculate_Button_Click(object sender, RoutedEventArgs e)
+        private void Calculate_Button_Click(object sender, RoutedEventArgs e) //Calculate 
         {
             expressionsString = InputTextBox.Text;
 
@@ -230,17 +230,47 @@ namespace FloreaGrad
                 pasi = _pasi;
             }
         }
-
-        private void NumberClick (object sender, RoutedEventArgs e)
+        private int[] unformatted = new int[100];
+        private int arrpos = -1;
+        private int parcount = 0;
+        private void NumberClick (object sender, RoutedEventArgs e) //KeyPad
         {
             string s = (sender as Button).Content.ToString();
+            /*
+            if (s == "(")
+                parcount++;
+            if (s == ")")
+                if (parcount > 0)
+                    parcount--;
+                else
+                    return;
+            */
+            arrpos++;
+            unformatted[arrpos] = s.Length;
             InputTextBox.Text = InputTextBox.Text + s ;
         }
 
-        private void DelClick(object sender, RoutedEventArgs e)
+        private void DelClick(object sender, RoutedEventArgs e) //Delete
         {
             if(InputTextBox.Text.Length > 0)
-            InputTextBox.Text = InputTextBox.Text.Remove(InputTextBox.Text.Length-1);
+            
+            InputTextBox.Text = InputTextBox.Text.Remove(InputTextBox.Text.Length-unformatted[arrpos--]);
+        }
+
+        private void FuncClick(object sender, RoutedEventArgs e) // Functions
+        {
+            string s = (sender as Button).Content.ToString();
+            arrpos++;
+            unformatted[arrpos] = s.Length+1;
+            InputTextBox.Text = InputTextBox.Text + s+"(";
+        }
+
+        private void Xclick(object sender, RoutedEventArgs e) // X
+        {
+            string s = (sender as Button).Content.ToString();
+            arrpos++;
+            unformatted[arrpos] = s.Length+2;
+            InputTextBox.Text = InputTextBox.Text + "[x]";
         }
     }
 

@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:FloreaGrad"
         mc:Ignorable="d"
-        Title="MainWindow" Height="542.412" Width="629.648">
+        Title="MainWindow" Height="543.412" Width="632.648">
     <Grid VerticalAlignment="Center" HorizontalAlignment="Center">
         <Grid.ColumnDefinitions>
             <ColumnDefinition/>
@@ -13,7 +13,7 @@
         <Image x:Name="GraphImage" HorizontalAlignment="Left" Height="188" Margin="39,36,0,0" VerticalAlignment="Top" Width="236"/>
         <GridSplitter HorizontalAlignment="Center" Margin="0" Width="5" HorizontalContentAlignment="Center" VerticalContentAlignment="Center"/>
         <TextBox x:Name="InputTextBox" HorizontalAlignment="Left" Height="23" Margin="415,36,0,0" TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Top" Width="120"/>
-        <GridSplitter HorizontalAlignment="Stretch" Margin="0" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Height="5" VerticalAlignment="Center"/>
+        <GridSplitter HorizontalAlignment="Stretch" Margin="1,245,-1,254" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Height="5" VerticalAlignment="Center"/>
         <Button x:Name="Calculate_Button" Content="Calculate" HorizontalAlignment="Left" Margin="431,190,0,0" VerticalAlignment="Top" Width="75" Click="Calculate_Button_Click"/>
         <TextBlock x:Name="a_" HorizontalAlignment="Left" Margin="318,157,0,0" TextWrapping="Wrap" Text="a=" VerticalAlignment="Top" RenderTransformOrigin="-5.287,2.887"/>
         <TextBox x:Name="ALimit" HorizontalAlignment="Left" Height="23" Margin="338,156,0,0" TextWrapping="Wrap" Text="0" VerticalAlignment="Top" Width="46"/>
@@ -22,7 +22,7 @@
         <TextBlock x:Name="b_" HorizontalAlignment="Left" Margin="431,157,0,0" TextWrapping="Wrap" Text="b=" VerticalAlignment="Top" RenderTransformOrigin="-5.287,2.887"/>
         <TextBlock x:Name="epsilon_" HorizontalAlignment="Left" Margin="522,154,0,0" TextWrapping="Wrap" Text="epsilon=" VerticalAlignment="Top" RenderTransformOrigin="-5.287,2.887"/>
         <TextBlock x:Name="ResultTextBox" HorizontalAlignment="Left" Margin="432,110,0,0" TextWrapping="Wrap" VerticalAlignment="Top" RenderTransformOrigin="-5.287,2.887"/>
-        <Grid x:Name="Grid1" HorizontalAlignment="Left" Height="254" Margin="4,250,0,0" VerticalAlignment="Top" Width="308">
+        <Grid x:Name="Grid1" HorizontalAlignment="Left" Height="254" Margin="0,250,0,0" VerticalAlignment="Top" Width="308">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition/>
                 <ColumnDefinition/>
@@ -53,7 +53,7 @@
             <Button x:Name="butdel" Content="Del" HorizontalAlignment="Center" VerticalAlignment="Center" Width="75" Grid.Column="2" Grid.Row="3" Height="50" FontSize="22" Click="DelClick" Margin="14,6"/>
             <Button x:Name="but_" Content="=" HorizontalAlignment="Center" VerticalAlignment="Center" Width="75" HorizontalContentAlignment="Center" Grid.Row="3" Height="50" FontSize="22" Click="Calculate_Button_Click" Margin="14,6"/>
         </Grid>
-        <Grid x:Name="Grid1_Copy" HorizontalAlignment="Left" Height="254" Margin="318,250,-6,0" VerticalAlignment="Top" Width="308">
+        <Grid x:Name="Grid1_Copy" HorizontalAlignment="Left" Height="254" Margin="313,250,-1,0" VerticalAlignment="Top" Width="308">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition/>
                 <ColumnDefinition/>
@@ -74,15 +74,15 @@
             <Button x:Name="nr_minus" Content="-" HorizontalAlignment="Center" Margin="0" VerticalAlignment="Center" Width="75" Grid.Column="1" Height="50" FontSize="22" Click="NumberClick"/>
             <Button x:Name="nr_multiplay" Content="*" HorizontalAlignment="Center" Margin="0" VerticalAlignment="Center" Width="75" Grid.Column="2" Height="50" FontSize="22" Click="NumberClick"/>
             <Button x:Name="nr_plus" Content="+" HorizontalAlignment="Center" Margin="0" VerticalAlignment="Center" Width="75" HorizontalContentAlignment="Center" Height="50" FontSize="22" Click="NumberClick"/>
-            <Button x:Name="nr_exp" Content="Pow" HorizontalAlignment="Center" VerticalAlignment="Center" Width="66" Grid.Column="1" Grid.Row="2" Height="50" FontSize="22" Click="NumberClick"/>
-            <Button x:Name="nr_sin" Content="Sin" HorizontalAlignment="Center" VerticalAlignment="Center" Width="75" Grid.Column="2" Grid.Row="2" Height="50" FontSize="22" Click="NumberClick"/>
-            <Button x:Name="nr_log" Content="Log" HorizontalAlignment="Center" VerticalAlignment="Center" Width="75" HorizontalContentAlignment="Center" Grid.Row="2" Height="50" FontSize="22" Click="NumberClick"/>
+            <Button x:Name="nr_exp" Content="Pow" HorizontalAlignment="Center" VerticalAlignment="Center" Width="66" Grid.Column="1" Grid.Row="2" Height="50" FontSize="22" Click="FuncClick"/>
+            <Button x:Name="nr_sin" Content="Sin" HorizontalAlignment="Center" VerticalAlignment="Center" Width="75" Grid.Column="2" Grid.Row="2" Height="50" FontSize="22" Click="FuncClick"/>
+            <Button x:Name="nr_log" Content="Log" HorizontalAlignment="Center" VerticalAlignment="Center" Width="75" HorizontalContentAlignment="Center" Grid.Row="2" Height="50" FontSize="22" Click="FuncClick"/>
             <Button x:Name="nr_par_open" Content="(" HorizontalAlignment="Center" VerticalAlignment="Center" Width="75" Grid.Column="1" Grid.Row="1" Height="50" FontSize="22" Click="NumberClick"/>
             <Button x:Name="nr_par_closed" Content=")" HorizontalAlignment="Center" VerticalAlignment="Center" Width="75" Grid.Column="2" Grid.Row="1" Height="50" FontSize="22" Click="NumberClick"/>
             <Button x:Name="nr_division" Content="/" HorizontalAlignment="Center" VerticalAlignment="Center" Width="75" HorizontalContentAlignment="Center" Grid.Row="1" Height="50" FontSize="22" Click="NumberClick"/>
-            <Button x:Name="nr_x" Content="[x]" HorizontalAlignment="Center" VerticalAlignment="Center" Width="66" Grid.Column="1" Grid.Row="3" Height="50" FontSize="22" Click="NumberClick" Margin="18,6"/>
-            <Button x:Name="nr_rad" Content="Sqrt" HorizontalAlignment="Center" VerticalAlignment="Center" Width="75" Grid.Column="2" Grid.Row="3" Height="50" FontSize="22" Click="DelClick" Margin="14,6"/>
-            <Button x:Name="nr_cos" Content="Cos" HorizontalAlignment="Center" VerticalAlignment="Center" Width="75" HorizontalContentAlignment="Center" Grid.Row="3" Height="50" FontSize="22" Click="Calculate_Button_Click" Margin="14,6"/>
+            <Button x:Name="nr_x" Content="X" HorizontalAlignment="Center" VerticalAlignment="Center" Width="66" Grid.Column="1" Grid.Row="3" Height="50" FontSize="22" Click="Xclick" Margin="18,6"/>
+            <Button x:Name="nr_rad" Content="Sqrt" HorizontalAlignment="Center" VerticalAlignment="Center" Width="75" Grid.Column="2" Grid.Row="3" Height="50" FontSize="22" Click="FuncClick" Margin="14,6"/>
+            <Button x:Name="nr_cos" Content="Cos" HorizontalAlignment="Center" VerticalAlignment="Center" Width="75" HorizontalContentAlignment="Center" Grid.Row="3" Height="50" FontSize="22" Click="FuncClick" Margin="14,6"/>
         </Grid>
 
     </Grid>
