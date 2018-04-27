@@ -28,12 +28,14 @@ namespace FloreaGrad
         public string value;
 
         private int[] unformatted = new int[100];
+        private int[] formatted = new int[100];
         private int arrpos = -1;
 
         public MainWindow()
         {
             InitializeComponent();
             InputTextBox.Text = "";
+            FunctionTextBlock = "";
         }
         float offset = 2;
 
@@ -252,6 +254,7 @@ namespace FloreaGrad
             */
             arrpos++;
             unformatted[arrpos] = s.Length;
+
             InputTextBox.Text = InputTextBox.Text + s ;
         }
 
