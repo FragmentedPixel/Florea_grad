@@ -30,14 +30,15 @@ namespace FloreaGrad
         private int[] unformatted = new int[100];
         private int[] formatted = new int[100];
         private int arrpos = -1;
+        float offset = 2;
 
         public MainWindow()
         {
             InitializeComponent();
             InputTextBox.Text = "";
-            FunctionTextBlock = "";
+            FunctionTextBlock.Text = "";
         }
-        float offset = 2;
+       
 
         private void Calculate_Button_Click(object sender, RoutedEventArgs e) //Calculate 
         {
@@ -50,9 +51,24 @@ namespace FloreaGrad
             float _epsilon = float.Parse(Epsilon.Text);
 
             Rezultat resultat = TrapezMethod.CalculeazaAria(_a, _b, _epsilon);
-            ResultTextBox.Text = "Valoare = " + resultat.valoare.ToString() + "\nPasi = " + resultat.pasi.ToString();
+            ResultTextBox.Text = "•Cuadratura trapezului: \nValoare = " + resultat.valoare.ToString() + "\nPasi = " + resultat.pasi.ToString() + "\n";
+            
+            resultat = SimpsonMethod.CalculeazaAria(_a, _b, _epsilon);
+            ResultTextBox.Text += "•Cuadratura lui Simpson: \nValoare = " + resultat.valoare.ToString() + "\nPasi = " + resultat.pasi.ToString() + "\n";
 
-            MakeGraph(_a-offset, _b+offset, F(_a) - offset, F(_b) + offset);
+            resultat = NewtonMethod.CalculeazaAria(_a, _b, _epsilon);
+            ResultTextBox.Text += "•Cuadratura lui Newton: \nValoare = " + resultat.valoare.ToString() + "\nPasi = " + resultat.pasi.ToString()+ "\n";
+
+            resultat = BooleMethod.CalculeazaAria(_a, _b, _epsilon);
+            ResultTextBox.Text += "•Cuadratura lui Boole: \nValoare = " + resultat.valoare.ToString() + "\nPasi = " + resultat.pasi.ToString() + "\n";
+
+            resultat = DreptunghiMethod.CalculeazaAria(_a, _b, _epsilon);
+            ResultTextBox.Text += "•Cuadratura dreptunghiului: \nValoare = " + resultat.valoare.ToString() + "\nPasi = " + resultat.pasi.ToString() + "\n";
+
+            resultat = DouPuncteMethod.CalculeazaAria(_a, _b, _epsilon);
+            ResultTextBox.Text += "•Cuadratura cu două puncte interioare: \nValoare = " + resultat.valoare.ToString() + "\nPasi = " + resultat.pasi.ToString() + "\n";
+
+            MakeGraph(_a - offset, _b + offset, F(_a) - offset, F(_b) + offset);
         }
 
         private static float F(float x)
@@ -222,6 +238,214 @@ namespace FloreaGrad
 
                 Rezultat resultat = new Rezultat(s2, n);
                 return resultat;
+            }
+        }
+
+        public static class SimpsonMethod
+        {
+
+            public static float a, b, s1, s2, dx, epsilon, d, c;
+            public static int i, j, n;
+
+            public static Rezultat CalculeazaAria(float _a, float _b, float _epsilon)
+            {
+                a = _a;
+                b = _b;
+                epsilon = _epsilon;
+
+                s1 = (b - a) * (F(a) + 4 * F((b + a) / 2) + F(b)) / 2;
+                s2 = (b - a) * (F(a) + 4 * ((3 * a + b) / 4) + 2 * F((b + a) / 2) + 4 * F((3 * b + a) / 4) + F(b)) / 4;
+                if (s1 > s2) dx = s1 - s2;
+                else dx = s2 - s1;
+                n = 2;
+                while (dx > epsilon)
+                {
+                    s1 = s2;
+                    n = n + 1;
+                    d = a;
+                    c = (b - a) / (2 * n);
+                    s2 = 0;
+                    for (j = 0; j <= 2 * n; j++)
+                    {
+                        if ((j % 2 == 0) && (j < 2 * n))
+                            s2 = s2 + 4 * F(d);
+                        else
+                          if ((j % 2 == 1) && (j < 2 * n))
+                            s2 = s2 + 2 * F(d);
+                        else
+                            s2 = s2 + F(d);
+                        d = d + c;
+                    }
+                    s2 = s2 * (b - a) / (6 * n);
+                    if (s1 > s2) dx = s1 - s2;
+                    else dx = s2 - s1;
+                }
+
+                Rezultat rezultat = new Rezultat(s2, n);
+                return rezultat;
+            }
+
+
+
+        }
+
+        public static class NewtonMethod
+        {
+            public static float a, b, s1, s2, dx, epsilon, d, c;
+            public static int i, j, n;
+
+            public static Rezultat CalculeazaAria(float _a, float _b, float _epsilon)
+            {
+                a = _a;
+                b = _b;
+                epsilon = _epsilon;
+
+                s1 = 0;
+                s2 = ((b - a) / 8) * (F(a) + F(b) + 3 * F((2 * a + b) / 3) + 3 * F((a + 2 * b) / 3));
+                if (s1 > s2) dx = s1 - s2;
+                else dx = s2 - s1;
+                n = 1;
+                while (dx > epsilon)
+                {
+                    s1 = s2;
+                    n = n + 1;
+                    d = a;
+                    c = (b - a) / (3 * n);
+                    s2 = F(a) + F(b);
+                    for (j = 1; j <= 3 * (n - 1); j++)
+                    {
+                        if (j % 3 == 0)
+                            s2 = s2 + 2 * F(d);
+                        else
+                            s2 = s2 + 3 * F(d);
+                        d = d + c;
+                    }
+                    s2 = s2 * (b - a) / (8 * n);
+                    if (s1 > s2) dx = s1 - s2;
+                    else dx = s2 - s1;
+                }
+
+                Rezultat rezultat = new Rezultat(s2, n);
+                return rezultat;
+            }
+        }
+
+        public static class BooleMethod
+        {
+
+            public static float a, b, s1, s2, dx, epsilon, d, c;
+            public static int i, j, n;
+
+            public static Rezultat CalculeazaAria(float _a, float _b, float _epsilon)
+            {
+                a = _a;
+                b = _b;
+                epsilon = _epsilon;
+
+                s1 = 0;
+                s2 = (2 * (b - a) / 45) * (7 * F(a) + 32 * F((3 * a + b) / 4) + 12 * F((a + b) / 2) + 32 * F((a + 3 * b) / 4) + 7 * F(b));
+                if (s1 > s2) dx = s1 - s2;
+                else dx = s2 - s1;
+                n = 2;
+                while (dx > epsilon)
+                {
+                    s1 = s2;
+                    n = n + 1;
+                    d = a;
+                    c = (b - a) / (4 * n);
+                    s2 = 7 * F(a) + 7 * F(b);
+                    for (j = 1; j <= 4 * (n - 1); j++)
+                    {
+                        if (j % 4 == 0)
+                            s2 = s2 + 14 * F(d);
+                        else
+                            if ((j % 2 == 1) || (j % 3 == 0))
+                            s2 = s2 + 32 * F(d);
+                        else
+                            s2 = s2 + 12 * F(d);
+                        d = d + c;
+                    }
+                    s2 = s2 * 2 * (b - a) / (45 * (4 * n));
+                    if (s1 > s2) dx = s1 - s2;
+                    else dx = s2 - s1;
+                }
+
+                Rezultat rezultat = new Rezultat(s2, n);
+                return rezultat;
+            }
+        }
+
+        public static class DreptunghiMethod
+        {
+            public static float a, b, s1, s2, dx, epsilon, d, c, i, n;
+
+            public static Rezultat CalculeazaAria(float _a, float _b, float _epsilon)
+            {
+                a = _a;
+                b = _b;
+                epsilon = _epsilon;
+
+
+                s1 = F((a + b) / 2) * (b - a);
+                s2 = F((3 * a + b) / 4) * (b - a) / 2 + F((a + 3 * b) / 4) * (b - a) / 2;
+                if (s1 > s2) dx = s1 - s2;
+                else dx = s2 - s1;
+                n = 2;
+                while (dx > epsilon)
+                {
+                    s1 = s2;
+                    s2 = 0;
+                    n = n + 1;
+                    i = a + (b - a) / n;
+                    while (i <= b)
+                    {
+                        s2 = s2 + F(i - (b - a) / (2 * n));
+                        i = i + ((b - a) / n);
+                    }
+                    s2 = s2 * (b - a) / n;
+                    if (s1 > s2) dx = s1 - s2;
+                    else dx = s2 - s1;
+                }
+
+                Rezultat rezultat = new Rezultat(s2, n);
+                return rezultat;
+            }
+
+        }
+
+        public static class DouPuncteMethod
+        {
+            public static float a, b, s1, s2, dx, epsilon, d, c, i, n;
+
+            public static Rezultat CalculeazaAria(float _a, float _b, float _epsion)
+            {
+                a = _a;
+                b = _b;
+                epsilon = _epsion;
+
+                s1 = 0;
+                s2 = (b - a) / 2 * (F((2 * a + b) / 3) + F((a + 2 * b) / 3));
+                if (s1 > s2) dx = s1 - s2;
+                else dx = s2 - s1;
+                n = 1;
+                while (dx > epsilon)
+                {
+                    s1 = s2;
+                    s2 = 0;
+                    n = n + 1;
+                    i = a + (b - a) / n;
+                    while (i <= b)
+                    {
+                        s2 = s2 + F(i - 2 * (b - a) / (3 * n)) + F(i - (b - a) / (3 * n));
+                        i = i + ((b - a) / n);
+                    }
+                    s2 = s2 * ((b - a) / (2 * n));
+                    if (s1 > s2) dx = s1 - s2;
+                    else dx = s2 - s1;
+                }
+
+                Rezultat rezultat = new Rezultat(s2, n);
+                return rezultat;
             }
         }
 
